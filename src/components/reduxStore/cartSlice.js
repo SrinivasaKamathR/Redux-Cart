@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { cartItems: [], totalQuantity: 0 };
 
+//creating slice
 const cartSlice = createSlice({
   name: "cart",
   initialState: initialState,
@@ -32,7 +33,9 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (state.cartItems[expenseItemIndex].quantity === 1) {
-        state.cartItems.splice(expenseItemIndex, 1);
+        state.cartItems = state.cartItems.filter(
+          (item) => item.id !== state.cartItems[expenseItemIndex].id
+        );
         state.totalQuantity--;
       } else {
         state.cartItems[expenseItemIndex].quantity--;
